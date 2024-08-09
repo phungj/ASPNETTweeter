@@ -1,6 +1,17 @@
-@ASPNETTweeter_HostAddress = http://localhost:5257
+@ASPNETTweeter_HostAddress = https://localhost:7235
 
-GET {{ASPNETTweeter_HostAddress}}/weatherforecast/
+###
+
+GET {{ASPNETTweeter_HostAddress}}/tweet
 Accept: application/json
+
+###
+
+POST {{ASPNETTweeter_HostAddress}}/tweet
+Content-Type: application/json
+
+{
+    "content": "Hello World!"
+}
 
 ###

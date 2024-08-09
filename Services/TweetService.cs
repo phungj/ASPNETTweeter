@@ -11,7 +11,7 @@ public static class TweetService {
     static TweetService() {
         string? MONGO_INITDB_ROOT_PASSWORD = System.Environment.GetEnvironmentVariable("MONGO_INITDB_ROOT_PASSWORD");
         
-        TweetCollection = new MongoClient($"mongodb://root:{MONGO_INITDB_ROOT_PASSWORD}@mongo")
+        TweetCollection = new MongoClient($"mongodb://localhost")
                                          .GetDatabase("tweets")
                                          .GetCollection<Tweet>("tweets");
 

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using ASPNETTweeter.Models;
 using ASPNETTweeter.Services;
-using System.Net;
+using MongoDB.Bson;
 
 namespace ASPNETTweeter.Controllers;
 
@@ -20,6 +20,28 @@ public class TweetController : ControllerBase {
             return CreatedAtAction(nameof(GetTweets), null, tweet);
         } catch(ArgumentException) {
             return BadRequest();
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteTweet(string id) {
+        try {
+            TweetService.DeleteTweet(new ObjectId(id));
+
+            return NoContent();
+        } catch(ArgumentException) {
+            return NotFound();
+        }
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult LikeTweet(string id) {
+        try {
+            TweetService.LikeTweet(new ObjectId(id));
+
+            return NoContent();
+        } catch(ArgumentException) {
+            return NotFound();
         }
     }
 }
