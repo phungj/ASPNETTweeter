@@ -33,7 +33,7 @@ public static class TweetService {
         }
     }
 
-    public static void DeleteTweet(ObjectId id) {
+    public static void DeleteTweet(string id) {
         long deletedCount = TweetCollection.DeleteOne(tweet => tweet.Id == id).DeletedCount;
 
         if(deletedCount == 0) {
@@ -41,7 +41,7 @@ public static class TweetService {
         }
     }
 
-    public static void LikeTweet(ObjectId id) {
+    public static void LikeTweet(string id) {
         UpdateDefinition<Tweet> likeUpdate = Builders<Tweet>.Update.Inc("Likes", 1);
 
         long updatedCount = TweetCollection.UpdateOne(tweet => tweet.Id == id, likeUpdate).ModifiedCount;

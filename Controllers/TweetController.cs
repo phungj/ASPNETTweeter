@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 
 using ASPNETTweeter.Models;
 using ASPNETTweeter.Services;
-using MongoDB.Bson;
 
 namespace ASPNETTweeter.Controllers;
 
@@ -26,7 +25,7 @@ public class TweetController : ControllerBase {
     [HttpDelete("{id}")]
     public IActionResult DeleteTweet(string id) {
         try {
-            TweetService.DeleteTweet(new ObjectId(id));
+            TweetService.DeleteTweet(id);
 
             return NoContent();
         } catch(ArgumentException) {
@@ -37,7 +36,7 @@ public class TweetController : ControllerBase {
     [HttpPut("{id}")]
     public IActionResult LikeTweet(string id) {
         try {
-            TweetService.LikeTweet(new ObjectId(id));
+            TweetService.LikeTweet(id);
 
             return NoContent();
         } catch(ArgumentException) {
