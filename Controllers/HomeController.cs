@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using ASPNETTweeter.Services;
 using ASPNETTweeter.Models;
-using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Html;
 
 namespace ASPNETTweeter.Controllers;
 
@@ -11,10 +11,12 @@ namespace ASPNETTweeter.Controllers;
 public class HomeController : Controller {
     [HttpGet]
     public ViewResult Home() {
+        ViewData["Tweets"] = GenerateTweetTable(TweetService.GetTweets());
+
         return View();
     }
 
-    private string GenerateTweetTable(List<Tweet> tweets) {
+    private HtmlString GenerateTweetTable(List<Tweet> tweets) {
         string table = @"
         <table>
             <thead>
@@ -28,8 +30,16 @@ public class HomeController : Controller {
             <tbody>
         ";
 
-        // TODO: Complete impl
+        foreach(Tweet tweet in tweets) {
+            table += @$"
+            <tr>
+                <td>{tweet.Id}</td>
+                <td>{tweet.Content}</td>
+                <td>{tweet.Likes}</td>
+            </tr>
+            ";
+        }
 
-        return table;
+        return new HtmlString(table + "</tbody></table>");
     }
 }

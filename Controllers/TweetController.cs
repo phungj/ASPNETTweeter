@@ -33,7 +33,7 @@ public class TweetController : ControllerBase {
         }
     }
 
-    [HttpPut("{id}")]
+    [HttpPatch("{id}")]
     public IActionResult LikeTweet(string id) {
         try {
             TweetService.LikeTweet(id);

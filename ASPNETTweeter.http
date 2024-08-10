@@ -25,7 +25,7 @@ Content-Type: application/json
 
 ###
 
-PUT {{ASPNETTweeter_HostAddress}}/tweet/66b66193786b480c39e899e7
+PATCH {{ASPNETTweeter_HostAddress}}/tweet/66b7f579dd563e88fc90e444
 
 ###
 
