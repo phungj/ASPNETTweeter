@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Html;
 namespace ASPNETTweeter.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class HomeController : Controller {
+[Route("/")]
+public class IndexController : Controller {
     [HttpGet]
-    public ViewResult Home() {
+    public ViewResult Index() {
         ViewData["Tweets"] = GenerateTweetTable(TweetService.GetTweets());
 
         return View();

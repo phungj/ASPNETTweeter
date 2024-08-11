@@ -1,11 +1,18 @@
 @ASPNETTweeter_HostAddress = https://localhost:7235
 
-###
+### Happy Path Tests
+
+### GET Index
+
+GET {{ASPNETTweeter_HostAddress}}
+Accept: text/html
+
+### GET Tweets
 
 GET {{ASPNETTweeter_HostAddress}}/tweet
 Accept: application/json
 
-###
+### POST Tweet
 
 POST {{ASPNETTweeter_HostAddress}}/tweet
 Content-Type: application/json
@@ -14,7 +21,7 @@ Content-Type: application/json
     "content": "Hello World!"
 }
 
-###
+### POST Second Tweet
 
 POST {{ASPNETTweeter_HostAddress}}/tweet
 Content-Type: application/json
@@ -23,12 +30,22 @@ Content-Type: application/json
     "content": "I love .NET! ❤️"
 }
 
-###
+### Like Tweet
 
 PATCH {{ASPNETTweeter_HostAddress}}/tweet/66b7f579dd563e88fc90e444
 
-###
+### DELETE Tweet
 
 DELETE {{ASPNETTweeter_HostAddress}}/tweet/66b66193786b480c39e899e7
 
+
+### Error Handling Tests
+### Invalid Index Operations
+
 ### TODO: Add some tests for error handling
+
+### Invalid Tweet Operations
+
+### TODO:
+
+### 

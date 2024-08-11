@@ -1,0 +1,6 @@
+<h1>Tweeter</h1>
+<p>This is Tweeter, a Twitter clone with basic functionality to create, store, and engage with tweets.  Ideally, this would serve as the backend for a much nicer Tweeter frontend, so the REST API could be accessed through fetch requests as compared to raw REST calls.  However, that was not prioritized for the project.</p>
+<p>The app has two main endpoints, / and /tweet, but the tweet endpoint in particular has a variety of functions.  <a href='./'>/</a> returns this page with the tweets through a GET request.  <a href='./tweet'>/tweet</a> via a GET request also returns the current tweets, although formatted as JSON and not as a HTML page to view.  <a href='./tweet'>/tweet</a> via a POST request creates a new tweet, accepting the tweet in the body of the request.  It expects JSON with "content" mapping to a string with the tweet to make.  <a href='./tweet/[TWEET ID]'>/tweet/[TWEET ID]</a> via a DELETE request deletes a tweet.  It expects the tweet ID to be appended to the end of the URL path.  <a href='./tweet/[TWEET ID]'>/tweet/[TWEET ID]</a> via a PATCH request adds a like to a tweet.  Like with deletion, it expects the tweet ID to be appended to the end of the URL path.</p>
+<p>The tweets are persistent, stored in a MongoDB instance, check them out below!</p>
+
+@ViewData["Tweets"]
