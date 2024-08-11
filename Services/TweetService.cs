@@ -8,16 +8,23 @@ public static class TweetService {
     static readonly IMongoCollection<Tweet> TweetCollection;
 
     static TweetService() {
-        string? MONGO_INITDB_ROOT_PASSWORD = System.Environment.GetEnvironmentVariable("MONGO_INITDB_ROOT_PASSWORD");
-        
         TweetCollection = new MongoClient($"mongodb://localhost")
                                          .GetDatabase("tweets")
                                          .GetCollection<Tweet>("tweets");
-
     }
 
     public static List<Tweet> GetTweets() {
         return TweetCollection.Find(_ => true).ToList();
+    }
+
+    public static Tweet GetTweet(string id) {
+        List<Tweet> tweets = TweetCollection.Find(tweet => tweet.Id == id).ToList();
+
+        if(tweets.Count == 0) {
+            throw new ArgumentException("tweet with given ID not found");
+        } else {
+            return tweets[0];
+        }
     }
 
     public static void AddTweet(Tweet tweet) {
