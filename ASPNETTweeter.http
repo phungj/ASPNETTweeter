@@ -19,7 +19,7 @@ POST {{ASPNETTweeter_HostAddress}}/tweet
 Content-Type: application/json
 
 {
-    "content": "Hello World!"
+    "content": "Hello Tom!"
 }
 
 ### POST Second Tweet
@@ -28,20 +28,20 @@ POST {{ASPNETTweeter_HostAddress}}/tweet
 Content-Type: application/json
 
 {
-    "content": "I love .NET! ❤️"
+    "content": "I just bought your new washer.  I'm struggling to get it to work.  I've called the office 30 times.  No one answers.  Please help."
 }
 
 ### Like Tweet
 
-PATCH {{ASPNETTweeter_HostAddress}}/tweet/66b7f579dd563e88fc90e444
+PATCH {{ASPNETTweeter_HostAddress}}/tweet/66ba7827f53116cdf83cf921
 
 ### DELETE Tweet
 
-DELETE {{ASPNETTweeter_HostAddress}}/tweet/66b66193786b480c39e899e7
+DELETE {{ASPNETTweeter_HostAddress}}/tweet/66b7f579dd563e88fc90e444
 
 ### Analyze Tweet
 
-POST {{ASPNETTweeter_HostAddress}}/sentiment/66b7f579dd563e88fc90e444
+POST {{ASPNETTweeter_HostAddress}}/sentiment/66ba7932f53116cdf83cf922
 Accept: application/json
 
 ### Sentiment Analysis Tests
