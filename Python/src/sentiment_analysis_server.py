@@ -22,6 +22,14 @@ labels = ['Negative', 'Neutral', 'Positive']
 
 @app.after_request
 def add_headers(response):
+    #
+    # This function adds some additional headers to the response for 
+    # access control.
+    # 
+    # :param response: The response Flask will send back to the client.
+    # :return: The updated response Flask will send back to the client.
+    #
+
     response.headers['Access-Control-Allow-Origin'] = "*"
     response.headers['Access-Control-Allow-Headers'] = "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
     response.headers['Access-Control-Allow-Methods'] = "POST"
@@ -31,6 +39,16 @@ def add_headers(response):
 
 @app.route("/sentiment", methods=["POST"])
 def sentiment_analysis():
+    #
+    # This endpoint conducts sentiment analysis on the given content.  
+    # The sentiment analysis model accepts a string and returns JSON with
+    # the predicted class and confidence.  The three classes are negative, positive,
+    # and neutral.
+    #
+    # :return: JSON containing the predicted sentiment and confidence from the three
+    #          previous classes.
+    #
+    
     encoded_input = tokenizer(request.json['content'], return_tensors='pt')
     output = model(**encoded_input)
     scores = softmax(output[0][0].detach().numpy())

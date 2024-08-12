@@ -4,6 +4,11 @@ using ASPNETTweeter.Models;
 
 namespace ASPNETTweeter.Services;
 
+/// <summary>
+/// This Service manages the MongoDB database containing the tweets.  It provides
+/// methods for the basic CRUD operations for interacting with tweets, except for 
+/// updating, which is liking instead.
+/// </summary>
 public static class TweetService {    
     static readonly IMongoCollection<Tweet> TweetCollection;
 
@@ -13,10 +18,20 @@ public static class TweetService {
                                          .GetCollection<Tweet>("tweets");
     }
 
+    /// <summary>
+    /// This method gets all the tweets currently in the database.
+    /// </summary>
+    /// <returns>A List<Tweet> containing every tweet currently in the database.</returns>
     public static List<Tweet> GetTweets() {
         return TweetCollection.Find(_ => true).ToList();
     }
 
+    /// <summary>
+    /// This method gets a specific tweet from the database.
+    /// </summary>
+    /// <param name="id">The ID of the tweet to get from the database.</param>
+    /// <returns>The Tweet with the given ID from the database.</returns>
+    /// <exception cref="ArgumentException">Thrown if a tweet with the given ID is not in the database.</exception>
     public static Tweet GetTweet(string id) {
         List<Tweet> tweets = TweetCollection.Find(tweet => tweet.Id == id).ToList();
 
@@ -27,6 +42,12 @@ public static class TweetService {
         }
     }
 
+    /// <summary>
+    /// This method adds a given tweet to the database.
+    /// </summary>
+    /// <param name="tweet">The Tweet to add to the database.</param>
+    /// <exception cref="ArgumentException">Thrown if the tweet has no Content or is longer than the maximum tweet
+    /// length of 280 characters.</exception>
     public static void AddTweet(Tweet tweet) {
         uint MAX_TWEET_LENGTH = 280;
 
@@ -39,6 +60,11 @@ public static class TweetService {
         }
     }
 
+    /// <summary>
+    /// This method deletes the tweet with the given ID from the database.
+    /// </summary>
+    /// <param name="id">The ID of the tweet to delete from the database.</param>
+    /// <exception cref="ArgumentException">Thrown if no tweet with the given ID exists in the database.</exception>
     public static void DeleteTweet(string id) {
         long deletedCount = TweetCollection.DeleteOne(tweet => tweet.Id == id).DeletedCount;
 
@@ -47,6 +73,12 @@ public static class TweetService {
         }
     }
 
+    /// <summary>
+    /// This method increments the like counter of the tweet with the given ID
+    /// in the database.
+    /// </summary>
+    /// <param name="id">The ID of the tweet to like in the database.</param>
+    /// <exception cref="ArgumentException">Thrown if no tweet with the given ID exists in the database.</exception>
     public static void LikeTweet(string id) {
         UpdateDefinition<Tweet> likeUpdate = Builders<Tweet>.Update.Inc("Likes", 1);
 

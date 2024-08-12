@@ -41,7 +41,7 @@ DELETE {{ASPNETTweeter_HostAddress}}/tweet/66b66193786b480c39e899e7
 
 ### Analyze Tweet
 
-POST {{ASPNETTweeter_HostAddress}}/sentiment/66b66198786b480c39e899e8
+POST {{ASPNETTweeter_HostAddress}}/sentiment/66b7f579dd563e88fc90e444
 Accept: application/json
 
 ### Sentiment Analysis Tests
@@ -54,12 +54,20 @@ Content-Type: application/json
 }
 
 ### Error Handling Tests
-### Invalid Index Operations
 
-### TODO: Add some tests for error handling
+### Liking Tweet that doesn't Exist
 
-### Invalid Tweet Operations
+PATCH {{ASPNETTweeter_HostAddress}}/tweet/test
 
-### TODO:
+###
 
-### 
+PATCH {{ASPNETTweeter_HostAddress}}/tweet/66b66193786b480c39e899e0
+
+### Deleting Tweet that doesn't Exist
+
+DELETE {{ASPNETTweeter_HostAddress}}/tweet/test
+
+###
+
+DELETE {{ASPNETTweeter_HostAddress}}/tweet/66b66193786b480c39e899e0
+
